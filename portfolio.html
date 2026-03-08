@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmarterQueue Design System — OrcaDesign</title>
+    <title>Work — OrcaDesign</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,126 +31,65 @@
         </div>
     </header>
 
-    <!-- Case Hero -->
-    <section class="case-hero-section">
+    <!-- Work Hero -->
+    <section class="work-hero">
         <div class="container">
-            <a href="portfolio.html" class="back-link">&larr; All Projects</a>
-            <p class="case-label">Design System</p>
-            <h1 class="case-hero-title">SmarterQueue</h1>
-            <p class="case-hero-subtitle">Complete design system for a social media management platform — colour tokens, typography, components, and patterns serving 50k+ users.</p>
-            <div class="case-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Client</span>
-                    <span class="meta-value">SmarterQueue</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Scope</span>
-                    <span class="meta-value">Design System</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Deliverables</span>
-                    <span class="meta-value">Tokens, Components, Guidelines</span>
-                </div>
-            </div>
+            <p class="case-label">Portfolio</p>
+            <h1 class="case-hero-title">Selected Work</h1>
+            <p class="case-hero-subtitle">Design systems, product interfaces, and strategic deliverables for ambitious product teams.</p>
         </div>
     </section>
 
-    <!-- Colour Palette Section -->
-    <section class="ds-section" id="colours">
+    <!-- Project Catalog -->
+    <section class="work-catalog">
         <div class="container">
-            <div class="ds-section-header">
-                <h2 class="ds-section-title">Colour System</h2>
-                <p class="ds-section-desc">A structured palette built around 5 primary hues, each with dark and light variants for flexible UI application. Semantic naming ensures consistency across product teams.</p>
+
+            <!-- Filter by type -->
+            <div class="work-filters">
+                <button class="work-filter active" data-filter="all">All</button>
+                <button class="work-filter" data-filter="design-system">Design Systems</button>
+                <button class="work-filter" data-filter="product">Product Design</button>
+                <button class="work-filter" data-filter="ux">UX & Research</button>
             </div>
 
-            <!-- Primary Colours -->
-            <div class="palette-group">
-                <h3 class="palette-group-title">Primary Colours</h3>
-                <div class="palette-row">
-                    <div class="color-stack">
-                        <div class="color-swatch color-swatch-lg" style="background:#4075BF"></div>
-                        <div class="color-swatch" style="background:#255DAD"></div>
-                        <div class="color-swatch" style="background:#A2B8E6"></div>
-                        <div class="color-info">
-                            <span class="color-name">Blue</span>
-                            <span class="color-hex">#4075BF</span>
-                        </div>
-                    </div>
-                    <div class="color-stack">
-                        <div class="color-swatch color-swatch-lg" style="background:#35AA35"></div>
-                        <div class="color-swatch" style="background:#2B8925"></div>
-                        <div class="color-swatch" style="background:#86D286"></div>
-                        <div class="color-info">
-                            <span class="color-name">Green</span>
-                            <span class="color-hex">#35AA35</span>
-                        </div>
-                    </div>
-                    <div class="color-stack">
-                        <div class="color-swatch color-swatch-lg" style="background:#D41111"></div>
-                        <div class="color-swatch" style="background:#AA0E0E"></div>
-                        <div class="color-swatch" style="background:#FFF5F5"></div>
-                        <div class="color-info">
-                            <span class="color-name">Red</span>
-                            <span class="color-hex">#D41111</span>
-                        </div>
-                    </div>
-                    <div class="color-stack">
-                        <div class="color-swatch color-swatch-lg" style="background:#E5A40D"></div>
-                        <div class="color-swatch" style="background:#EB9B03"></div>
-                        <div class="color-swatch" style="background:#FFFAF0"></div>
-                        <div class="color-info">
-                            <span class="color-name">Yellow</span>
-                            <span class="color-hex">#E5A40D</span>
-                        </div>
-                    </div>
-                    <div class="color-stack">
-                        <div class="color-swatch color-swatch-lg" style="background:#A839CA"></div>
-                        <div class="color-swatch" style="background:#842697"></div>
-                        <div class="color-swatch" style="background:#F0E0F5"></div>
-                        <div class="color-info">
-                            <span class="color-name">Purple</span>
-                            <span class="color-hex">#A839CA</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Projects Grid -->
+            <div class="work-grid">
 
-            <!-- Greyscale & UI -->
-            <div class="palette-group">
-                <h3 class="palette-group-title">Greyscale & UI Colours</h3>
-                <div class="palette-strip">
-                    <div class="strip-swatch" style="background:#000000"><span class="strip-label strip-label-light">Pure Black<br>#000000</span></div>
-                    <div class="strip-swatch" style="background:#072653"><span class="strip-label strip-label-light">Black Text<br>#072653</span></div>
-                    <div class="strip-swatch" style="background:#2C476C"><span class="strip-label strip-label-light">Dark Grey<br>#2C476C</span></div>
-                    <div class="strip-swatch" style="background:#B393A9"><span class="strip-label strip-label-light">Light Grey Text<br>#B393A9</span></div>
-                    <div class="strip-swatch" style="background:#CDD9E9"><span class="strip-label">Pale Blue<br>#CDD9E9</span></div>
-                    <div class="strip-swatch" style="background:#EFF2F5"><span class="strip-label">Light Grey<br>#EFF2F5</span></div>
-                    <div class="strip-swatch" style="background:#F9FAFD"><span class="strip-label">Page BG<br>#F9FAFD</span></div>
-                    <div class="strip-swatch" style="background:#FFFFFF; border: 1px solid #eee"><span class="strip-label">White<br>#FFFFFF</span></div>
-                </div>
-            </div>
+                <!-- SmarterQueue DS -->
+                <a href="work/smarterqueue-ds.html" class="work-card" data-type="design-system">
+                    <div class="work-card-visual" style="background: linear-gradient(135deg, #1b3a5c, #2a5580);">
+                        <div class="work-card-icon">
+                            <div class="wci-palette">
+                                <span style="background:#4075BF"></span>
+                                <span style="background:#35AA35"></span>
+                                <span style="background:#D41111"></span>
+                                <span style="background:#E5A40D"></span>
+                                <span style="background:#A839CA"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-card-info">
+                        <span class="work-card-type">Design System</span>
+                        <h3 class="work-card-title">SmarterQueue</h3>
+                        <p class="work-card-desc">Colour tokens, typography, components, and patterns for a social media management platform.</p>
+                    </div>
+                    <span class="work-card-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </span>
+                </a>
 
-            <!-- Semantic -->
-            <div class="palette-group">
-                <h3 class="palette-group-title">Semantic Tokens</h3>
-                <div class="semantic-grid">
-                    <div class="semantic-card">
-                        <div class="semantic-swatch" style="background:#98DAFF"></div>
-                        <span class="semantic-name">Text Selection</span>
+                <!-- Placeholder cards for future projects -->
+                <div class="work-card work-card-empty">
+                    <div class="work-card-visual" style="background: var(--gray-100);">
+                        <span class="work-card-soon">Coming Soon</span>
                     </div>
-                    <div class="semantic-card">
-                        <div class="semantic-swatch" style="background:#ECF2FB"></div>
-                        <span class="semantic-name">Row Select</span>
-                    </div>
-                    <div class="semantic-card">
-                        <div class="semantic-swatch" style="background: rgba(6,33,71,0.85)"></div>
-                        <span class="semantic-name">Modal Overlay</span>
-                    </div>
-                    <div class="semantic-card">
-                        <div class="semantic-swatch" style="background: rgba(246,172,76,0.4)"></div>
-                        <span class="semantic-name">Disconnected</span>
+                    <div class="work-card-info">
+                        <span class="work-card-type">Product Design</span>
+                        <h3 class="work-card-title">New Project</h3>
+                        <p class="work-card-desc">Product design case study in progress.</p>
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -169,6 +108,27 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    // Filter buttons
+    const filters = document.querySelectorAll('.work-filter');
+    const cards = document.querySelectorAll('.work-card[data-type]');
+
+    filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filters.forEach(f => f.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            cards.forEach(card => {
+                if (filter === 'all' || card.dataset.type === filter) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+    </script>
 
 </body>
 </html>
