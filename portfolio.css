@@ -1,0 +1,257 @@
+/* ============================================
+   Portfolio Case Study Pages
+   ============================================ */
+
+/* Case Hero */
+.case-hero-section {
+    padding: 140px 0 80px;
+    background: var(--gray-50);
+}
+
+.back-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    margin-bottom: 32px;
+    transition: color 0.2s ease;
+}
+.back-link:hover { color: var(--black); }
+
+.case-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.case-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+
+.case-hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--gray-500);
+    font-weight: 300;
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+.case-meta {
+    display: flex;
+    gap: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--gray-200);
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meta-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+}
+
+.meta-value {
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: var(--black);
+}
+
+/* Design System Sections */
+.ds-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--gray-100);
+}
+
+.ds-section-header {
+    margin-bottom: 56px;
+}
+
+.ds-section-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.ds-section-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--gray-500);
+    font-weight: 300;
+    max-width: 560px;
+}
+
+/* Palette Groups */
+.palette-group {
+    margin-bottom: 56px;
+}
+
+.palette-group:last-child {
+    margin-bottom: 0;
+}
+
+.palette-group-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 24px;
+}
+
+/* Color Stacks — Primary */
+.palette-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .palette-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .palette-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.color-stack {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.color-swatch {
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.color-swatch-lg {
+    height: 80px;
+}
+
+.color-stack:hover .color-swatch {
+    transform: scaleY(1.05);
+}
+
+.color-info {
+    padding: 12px 14px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.color-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.color-hex {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    font-weight: 400;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+/* Greyscale Strip */
+.palette-strip {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+@media (max-width: 768px) {
+    .palette-strip {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .palette-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.strip-swatch {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.strip-swatch:hover {
+    transform: scale(1.04);
+    z-index: 2;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.strip-label {
+    font-size: 0.65rem;
+    line-height: 1.4;
+    color: var(--gray-700);
+    font-weight: 400;
+}
+
+.strip-label-light {
+    color: rgba(255,255,255,0.7);
+}
+
+/* Semantic Grid */
+.semantic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 600px) {
+    .semantic-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.semantic-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    background: white;
+}
+
+.semantic-swatch {
+    height: 64px;
+}
+
+.semantic-name {
+    display: block;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--gray-700);
+}
