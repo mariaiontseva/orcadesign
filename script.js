@@ -142,35 +142,7 @@ document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta').forEach(link => {
 
 // --- Portfolio (moved to portfolio.html) ---
 
-// --- Contact Form (Formsubmit + file upload via file.io) ---
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const btn = form.querySelector('.brief-submit');
-    const fileInput = form.querySelector('input[type="file"]');
-    const linkField = document.getElementById('attachmentLink');
-
-    if (btn) btn.textContent = 'Sending…';
-
-    // Upload file first if present
-    if (fileInput && fileInput.files.length > 0) {
-        try {
-            const fileData = new FormData();
-            fileData.append('file', fileInput.files[0]);
-            const upload = await fetch('https://file.io', { method: 'POST', body: fileData });
-            const result = await upload.json();
-            if (result.success && result.link) {
-                linkField.value = result.link + ' (' + fileInput.files[0].name + ')';
-            }
-        } catch (err) {
-            linkField.value = 'Upload failed — ask client to resend';
-        }
-        // Remove file input so Formsubmit doesn't choke on it
-        fileInput.disabled = true;
-    }
-
-    form.submit();
-});
+// --- Contact Form (Netlify Forms — native submit) ---
 
 // --- File Upload Feedback ---
 const fileUpload = document.getElementById('fileUpload');
