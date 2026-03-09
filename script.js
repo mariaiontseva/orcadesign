@@ -146,13 +146,44 @@ document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta').forEach(link => {
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = e.target;
-    form.innerHTML = `
-        <div class="form-success">
-            <h3>Message sent</h3>
-            <p>I'll get back to you within 24 hours.</p>
-        </div>
-    `;
+    const data = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    }).then(() => {
+        form.innerHTML = `
+            <div class="form-success">
+                <h3>Brief received</h3>
+                <p>Tell us about your product and where you want to take it. We'll get back to you within 24 hours with a proposal.</p>
+            </div>
+        `;
+    }).catch(() => {
+        form.innerHTML = `
+            <div class="form-success">
+                <h3>Brief received</h3>
+                <p>Tell us about your product and where you want to take it. We'll get back to you within 24 hours with a proposal.</p>
+            </div>
+        `;
+    });
 });
+
+// --- File Upload Feedback ---
+const fileUpload = document.getElementById('fileUpload');
+if (fileUpload) {
+    const fileInput = fileUpload.querySelector('input[type="file"]');
+    const textEl = fileUpload.querySelector('.file-upload-text');
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            textEl.textContent = fileInput.files[0].name;
+            fileUpload.classList.add('has-file');
+        } else {
+            textEl.textContent = 'Drop a brief, wireframe, or screenshot';
+            fileUpload.classList.remove('has-file');
+        }
+    });
+}
 
 // --- Scroll Animations (IntersectionObserver) ---
 function initAnimations() {
@@ -316,7 +347,139 @@ function initHeroGrid() {
     window.addEventListener('resize', resize);
 }
 
+// --- Scroll Progress Bar ---
+function initScrollProgress() {
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+    }, { passive: true });
+}
+
+
+// --- Contact Grid (multi-colour, mouse-reactive, local area only) ---
+function initContactGrid() {
+    const canvas = document.getElementById('contactGrid');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h;
+    const spacing = 50;
+    const radius = 180;
+    let mouse = { x: -1000, y: -1000 };
+
+    const palette = [
+        { r: 80, g: 140, b: 200 },   // soft blue
+        { r: 150, g: 100, b: 190 },   // lavender
+        { r: 90, g: 170, b: 160 },    // teal
+        { r: 200, g: 140, b: 90 },    // warm gold
+    ];
+
+    const section = canvas.parentElement;
+
+    section.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+
+    section.addEventListener('mouseleave', () => {
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
+
+    function resize() {
+        const rect = section.getBoundingClientRect();
+        w = canvas.width = rect.width;
+        h = canvas.height = rect.height;
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        // Only draw lines in a local window around the cursor
+        const lineRange = radius + spacing;
+
+        // horizontal lines — only segments near mouse
+        for (let y = spacing; y < h; y += spacing) {
+            if (Math.abs(mouse.y - y) > lineRange) continue;
+            const x1 = Math.max(0, mouse.x - lineRange);
+            const x2 = Math.min(w, mouse.x + lineRange);
+            // fade based on distance from mouse center
+            for (let seg = Math.floor(x1 / spacing) * spacing; seg < x2; seg += spacing) {
+                const sx = Math.max(x1, seg);
+                const ex = Math.min(x2, seg + spacing);
+                const midX = (sx + ex) / 2;
+                const dx = mouse.x - midX, dy = mouse.y - y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const inf = Math.max(0, 1 - dist / radius);
+                if (inf > 0.02) {
+                    ctx.beginPath(); ctx.moveTo(sx, y); ctx.lineTo(ex, y);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${inf * inf * 0.15})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // vertical lines — only segments near mouse
+        for (let x = spacing; x < w; x += spacing) {
+            if (Math.abs(mouse.x - x) > lineRange) continue;
+            const y1 = Math.max(0, mouse.y - lineRange);
+            const y2 = Math.min(h, mouse.y + lineRange);
+            for (let seg = Math.floor(y1 / spacing) * spacing; seg < y2; seg += spacing) {
+                const sy = Math.max(y1, seg);
+                const ey = Math.min(y2, seg + spacing);
+                const midY = (sy + ey) / 2;
+                const dx = mouse.x - x, dy = mouse.y - midY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const inf = Math.max(0, 1 - dist / radius);
+                if (inf > 0.02) {
+                    ctx.beginPath(); ctx.moveTo(x, sy); ctx.lineTo(x, ey);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${inf * inf * 0.15})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // colored dots at intersections near mouse only
+        const dotRange = radius;
+        const startX = Math.max(1, Math.floor((mouse.x - dotRange) / spacing)) * spacing;
+        const endX = Math.min(w, mouse.x + dotRange);
+        const startY = Math.max(1, Math.floor((mouse.y - dotRange) / spacing)) * spacing;
+        const endY = Math.min(h, mouse.y + dotRange);
+
+        for (let x = startX; x <= endX; x += spacing) {
+            for (let y = startY; y <= endY; y += spacing) {
+                const dx = mouse.x - x, dy = mouse.y - y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const inf = Math.max(0, 1 - dist / radius);
+                if (inf > 0.05) {
+                    const ci = ((Math.floor(x / spacing) + Math.floor(y / spacing)) % palette.length);
+                    const c = palette[ci];
+                    const a = inf * inf * 0.45;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 1.8 * inf, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${a})`;
+                    ctx.fill();
+                }
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+    window.addEventListener('resize', resize);
+}
+
 // --- Init ---
 initAnimations();
 initRotatingText();
 initHeroGrid();
+initContactGrid();
+initScrollProgress();
