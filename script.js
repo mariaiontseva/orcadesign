@@ -142,34 +142,34 @@ document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta').forEach(link => {
 
 // --- Portfolio (moved to portfolio.html) ---
 
-// --- Contact Form (Formspree with file upload) ---
-contactForm.addEventListener('submit', (e) => {
+// --- Contact Form (Formsubmit + file upload via file.io) ---
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.target;
-    const data = new FormData(form);
     const btn = form.querySelector('.brief-submit');
+    const fileInput = form.querySelector('input[type="file"]');
+    const linkField = document.getElementById('attachmentLink');
+
     if (btn) btn.textContent = 'Sending…';
 
-    fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-    }).then(res => {
-        if (res.ok) {
-            form.innerHTML = `
-                <div class="form-success">
-                    <h3>Brief received</h3>
-                    <p>Tell us about your product and where you want to take it. We'll get back to you within 24 hours with a proposal.</p>
-                </div>
-            `;
-        } else {
-            if (btn) btn.textContent = 'Send Brief';
-            res.json().then(d => alert(d.error || 'Error. Email hello@orcadesign.io directly.'));
+    // Upload file first if present
+    if (fileInput && fileInput.files.length > 0) {
+        try {
+            const fileData = new FormData();
+            fileData.append('file', fileInput.files[0]);
+            const upload = await fetch('https://file.io', { method: 'POST', body: fileData });
+            const result = await upload.json();
+            if (result.success && result.link) {
+                linkField.value = result.link + ' (' + fileInput.files[0].name + ')';
+            }
+        } catch (err) {
+            linkField.value = 'Upload failed — ask client to resend';
         }
-    }).catch(() => {
-        if (btn) btn.textContent = 'Send Brief';
-        alert('Connection error. Email hello@orcadesign.io directly.');
-    });
+        // Remove file input so Formsubmit doesn't choke on it
+        fileInput.disabled = true;
+    }
+
+    form.submit();
 });
 
 // --- File Upload Feedback ---
