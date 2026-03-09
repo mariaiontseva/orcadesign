@@ -147,13 +147,15 @@ contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
+    const btn = form.querySelector('.brief-submit');
+    if (btn) btn.textContent = 'Sending…';
 
     fetch(form.action, {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
     }).then(res => {
-        if (res.ok) {
+        if (res.ok || res.status === 200 || res.status === 302) {
             form.innerHTML = `
                 <div class="form-success">
                     <h3>Brief received</h3>
@@ -161,10 +163,12 @@ contactForm.addEventListener('submit', (e) => {
                 </div>
             `;
         } else {
-            alert('Something went wrong. Please try again or email hello@orcadesign.io directly.');
+            if (btn) btn.textContent = 'Send Brief';
+            alert('Something went wrong (' + res.status + '). Email hello@orcadesign.io directly.');
         }
     }).catch(() => {
-        alert('Connection error. Please try again or email hello@orcadesign.io directly.');
+        if (btn) btn.textContent = 'Send Brief';
+        alert('Connection error. Email hello@orcadesign.io directly.');
     });
 });
 
