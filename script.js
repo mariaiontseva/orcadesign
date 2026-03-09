@@ -142,35 +142,7 @@ document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta').forEach(link => {
 
 // --- Portfolio (moved to portfolio.html) ---
 
-// --- Contact Form ---
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    const btn = form.querySelector('.brief-submit');
-    if (btn) btn.textContent = 'Sending…';
-
-    fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-    }).then(res => {
-        if (res.ok || res.status === 200 || res.status === 302) {
-            form.innerHTML = `
-                <div class="form-success">
-                    <h3>Brief received</h3>
-                    <p>Tell us about your product and where you want to take it. We'll get back to you within 24 hours with a proposal.</p>
-                </div>
-            `;
-        } else {
-            if (btn) btn.textContent = 'Send Brief';
-            alert('Something went wrong (' + res.status + '). Email hello@orcadesign.io directly.');
-        }
-    }).catch(() => {
-        if (btn) btn.textContent = 'Send Brief';
-        alert('Connection error. Email hello@orcadesign.io directly.');
-    });
-});
+// --- Contact Form (native submit to Formsubmit) ---
 
 // --- File Upload Feedback ---
 const fileUpload = document.getElementById('fileUpload');
