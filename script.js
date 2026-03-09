@@ -152,20 +152,19 @@ contactForm.addEventListener('submit', (e) => {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
-    }).then(() => {
-        form.innerHTML = `
-            <div class="form-success">
-                <h3>Brief received</h3>
-                <p>Tell us about your product and where you want to take it. We'll get back to you within 24 hours with a proposal.</p>
-            </div>
-        `;
+    }).then(res => {
+        if (res.ok) {
+            form.innerHTML = `
+                <div class="form-success">
+                    <h3>Brief received</h3>
+                    <p>Tell us about your product and where you want to take it. We'll get back to you within 24 hours with a proposal.</p>
+                </div>
+            `;
+        } else {
+            alert('Something went wrong. Please try again or email hello@orcadesign.io directly.');
+        }
     }).catch(() => {
-        form.innerHTML = `
-            <div class="form-success">
-                <h3>Brief received</h3>
-                <p>Tell us about your product and where you want to take it. We'll get back to you within 24 hours with a proposal.</p>
-            </div>
-        `;
+        alert('Connection error. Please try again or email hello@orcadesign.io directly.');
     });
 });
 
