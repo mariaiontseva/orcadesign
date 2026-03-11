@@ -1283,3 +1283,107 @@
     border-top: 1px solid var(--gray-200);
     margin-top: 0;
 }
+
+/* ============================================
+   Bevy Cover — Portfolio Card Composition
+   ============================================ */
+.bevy-cover {
+    background: linear-gradient(150deg, #0a1912 0%, #1B4332 60%, #2d6a4f 100%) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Logo — top left, prominent */
+.bevy-cover-logo {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: -0.04em;
+    z-index: 1;
+}
+
+/* Desktop — browser frame, right-aligned, cropped */
+.bevy-cover-desktop {
+    position: absolute;
+    right: -3%;
+    top: 14%;
+    width: 72%;
+    height: 82%;
+    border-radius: 8px 0 0 0;
+    overflow: hidden;
+    box-shadow: -4px 4px 24px rgba(0, 0, 0, 0.35);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mini browser chrome */
+.bevy-cover-chrome {
+    background: #1a1a2e;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.bevy-cover-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.bevy-cover-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.bevy-cover-dots span:nth-child(1) { background: #ff5f57; }
+.bevy-cover-dots span:nth-child(2) { background: #ffbd2e; }
+.bevy-cover-dots span:nth-child(3) { background: #28c840; }
+
+.bevy-cover-url {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.bevy-cover-desktop img {
+    width: 100%;
+    flex: 1;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+}
+
+/* Phone — overlapping left edge of desktop */
+.bevy-cover-phone {
+    position: absolute;
+    left: 12%;
+    bottom: -8%;
+    width: 22%;
+    height: 80%;
+    background: #000;
+    border-radius: 14px 14px 0 0;
+    padding: 4px 4px 0;
+    box-shadow: 4px -2px 28px rgba(0, 0, 0, 0.4);
+    z-index: 3;
+    overflow: hidden;
+}
+
+.bevy-cover-phone img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 10px 10px 0 0;
+}
